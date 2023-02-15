@@ -11,6 +11,8 @@
 #     else:
 #         return update.message.reply_text(int(text[0]) / int(text[2]))
 
+import write_log as wl
+
 
 def calc_first(s):
     if not s:
@@ -33,6 +35,7 @@ def calc_first(s):
             new_list.append(el)
     # return old_list, new_list
     # print(new_list)
+    wl.write_data(f'Разбили выражение на список:\n {new_list}')
 
     while '(' in new_list:
         first_i = len(new_list) - new_list[::-1].index('(') - 1
@@ -43,6 +46,7 @@ def calc_first(s):
         
     new_list = calc(new_list)   # отправляем выражение на вычисление
     # print(*new_list)
+    wl.write_data(f'Вычислили результат: {new_list[0]}\nКонец работы программы.')
     return str(new_list[0])     # возвращаем вычисленный результат в виде строки!!, т.к. бот затем отправляет сообщение пользователю в виде строки!!
 
 def calc(my_list):
